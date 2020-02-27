@@ -35,7 +35,7 @@ export const ObjectKeyGenerators = {
               && requestEnvelope.context.System.user
               && requestEnvelope.context.System.user.userId)) {
             throw createAskSdkError(
-                'PartitionKeyGenerators',
+                'ObjectKeyGenerators',
                 'Cannot retrieve user id from request envelope!',
             );
         }
@@ -55,11 +55,31 @@ export const ObjectKeyGenerators = {
               && requestEnvelope.context.System.device
               && requestEnvelope.context.System.device.deviceId)) {
             throw createAskSdkError(
-                'PartitionKeyGenerators',
+                'ObjectKeyGenerators',
                 'Cannot retrieve device id from request envelope!',
             );
         }
 
         return requestEnvelope.context.System.device.deviceId;
+    },
+
+    /**
+     * Gets attributes id using skill id.
+     * @param {RequestEnvelope} requestEnvelope
+     * @returns {string}
+     */
+    skillId(requestEnvelope : RequestEnvelope) : string {
+        if (!(requestEnvelope
+              && requestEnvelope.context
+              && requestEnvelope.context.System
+              && requestEnvelope.context.System.application
+              && requestEnvelope.context.System.application.applicationId)) {
+            throw createAskSdkError(
+                'ObjectKeyGenerators',
+                'Cannot retrieve skill id from request envelope!',
+            );
+        }
+
+        return requestEnvelope.context.System.application.applicationId;
     },
 };

@@ -82,6 +82,14 @@ export class DynamoDbPersistenceAdapter implements PersistenceAdapter {
     }
 
     /**
+     * Sets the key generator in the adapter.
+     * @param {PartitionKeyGenerator} partitionKeyGenerator Key generator function.
+     */
+    public set keyGenerator(partitionKeyGenerator: PartitionKeyGenerator) {
+        this.partitionKeyGenerator = partitionKeyGenerator;
+    }
+
+    /**
      * Retrieves persistence attributes from AWS DynamoDB.
      * @param {RequestEnvelope} requestEnvelope Request envelope used to generate partition key.
      * @returns {Promise<Object.<string, any>>}

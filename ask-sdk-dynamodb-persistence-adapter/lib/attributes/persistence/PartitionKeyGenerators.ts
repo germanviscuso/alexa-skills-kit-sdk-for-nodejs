@@ -80,4 +80,24 @@ export const PartitionKeyGenerators = {
 
         return PartitionKeyGenerators.userId(requestEnvelope);
     },
+
+    /**
+     * Gets attributes id using skill id.
+     * @param {RequestEnvelope} requestEnvelope
+     * @returns {string}
+     */
+    skillId(requestEnvelope : RequestEnvelope) : string {
+        if (!(requestEnvelope
+              && requestEnvelope.context
+              && requestEnvelope.context.System
+              && requestEnvelope.context.System.application
+              && requestEnvelope.context.System.application.applicationId)) {
+            throw createAskSdkError(
+                'PartitionKeyGenerators',
+                'Cannot retrieve skill id from request envelope!',
+            );
+        }
+
+        return requestEnvelope.context.System.application.applicationId;
+    },
 };

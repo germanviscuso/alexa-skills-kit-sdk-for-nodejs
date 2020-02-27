@@ -45,6 +45,14 @@ export class S3PersistenceAdapter implements PersistenceAdapter {
     }
 
     /**
+     * Sets the key generator in the adapter.
+     * @param {ObjectKeyGenerator} objectKeyGenerator Key generator function.
+     */
+    public set keyGenerator(objectKeyGenerator: ObjectKeyGenerator) {
+        this.objectKeyGenerator = objectKeyGenerator;
+    }
+
+    /**
      * Retrieves persistence attributes from AWS S3.
      * @param {RequestEnvelope} requestEnvelope Request envelope used to generate object key.
      * @returns {Promise<Object.<string, any>>}
